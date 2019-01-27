@@ -13,6 +13,7 @@ INTENT_HOW_ARE_YOU = "mikpan:how_are_you"
 INTENT_GOOD = "mikpan:feeling_good"
 INTENT_BAD = "mikpan:feeling_bad"
 INTENT_ALRIGHT = "mikpan:feeling_alright"
+INTENT_WEATHER = "mikpan:what_is_the_weather"
 
 INTENT_FILTER_FEELING = [INTENT_GOOD, INTENT_BAD, INTENT_ALRIGHT]
 
@@ -44,8 +45,21 @@ def how_are_you_callback(hermes, intent_message):
         response = "Not so good. "
     response += "It's {} degrees in {}. How are you?".format(temp, config["secret"]["city"])
 
-    hermes.publish_continue_session(session_id, response, INTENT_FILTER_FEELING)
+    hermes.publish_continue_session(session_id, response, INTENT_WEATHER)
 
+
+
+def what_is_the_weather_callback(hermes, intent_message):
+    session_id = intent_message.session_id
+
+    # set mood according to weather
+    config = read_configuration_file(CONFIG_INI)
+    observation = hermes.owm.weather_at_place(config["secret"]["city"])
+    w = observation.get_weather()
+    temp = w.get_temperature('celsius')["temp"]
+    response += "It's {} degrees in {}. How are you?".format(temp, config["secret"]["city"])
+
+    hermes.publish_continue_session(session_id, response, INTENT_FILTER_FEELING)
 
 def feeling_good_callback(hermes, intent_message):
     session_id = intent_message.session_id
