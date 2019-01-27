@@ -10,9 +10,9 @@ CONFIGURATION_ENCODING_FORMAT = "utf-8"
 CONFIG_INI = "config.ini"
 
 INTENT_HOW_ARE_YOU = "mikpan:how_are_you"
-INTENT_GOOD = "bezzam:feeling_good"
-INTENT_BAD = "bezzam:feeling_bad"
-INTENT_ALRIGHT = "bezzam:feeling_alright"
+INTENT_GOOD = "mikpan:feeling_good"
+INTENT_BAD = "mikpan:feeling_bad"
+INTENT_ALRIGHT = "mikpan:feeling_alright"
 
 INTENT_FILTER_FEELING = [INTENT_GOOD, INTENT_BAD, INTENT_ALRIGHT]
 
